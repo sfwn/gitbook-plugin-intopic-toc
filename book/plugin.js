@@ -79,11 +79,18 @@ function buildNavigation(elements) {
         var href = elements[i].querySelector('.anchorjs-link').getAttribute('href');
 
         var item = document.createElement('li');
-
+        item.classList.add('ol-item');
+        item.classList.add(`ol-item-${elements[i].tagName}`)
         if (i === 0) {
             item.classList.add('selected');
         }
-
+        item.addEventListener('click', (e)=>{
+            var olItems = document.getElementsByClassName('ol-item')
+            for (var i = 0; i < olItems.length; i++){
+                olItems[i].classList.remove('selected');
+            }
+            e.currentTarget.classList.add('selected')
+        })
         var anchor = document.createElement('a');
         anchor.text = text;
         anchor.href = href;
